@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-     <color name="home_background">#ECECEC</color>
-     <color name="headline_background">#c4dd79</color>
-     <color name="user_icon_stroke">#6cc5ab</color>
-     <color name="poster_icon_stroke">#6cc5ab</color>
-     <color name="poster_background">#c4dd79</color>
-     <color name="base_color">#c4dd79</color>
-</resources>
