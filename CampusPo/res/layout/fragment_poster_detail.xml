@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@id/tv_released_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="2013年6月3日 21：00" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_released_time"
+            android:layout_below="@id/tv_released_time"
+            android:layout_marginTop="10dp"
+            android:text="活动说明" />
+
+        <TextView
+            android:id="@id/tv_poster_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_below="@+id/textView2"/>
+            
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_poster_description"
+            android:layout_below="@id/tv_poster_description"
+            android:layout_marginTop="10dp"
+            android:text="类别" />
+
+        <TextView
+            android:id="@+id/tv_poster_catagory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView4"
+            android:layout_below="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_poster_catagory"
+            android:layout_below="@id/tv_poster_catagory"
+            android:layout_marginTop="10dp"
+            android:text="标签" />
+
+        <TextView
+            android:id="@+id/tv_poster_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView6"
+            android:layout_alignRight="@+id/textView6"
+            android:layout_below="@+id/textView6" />
+    </RelativeLayout>
+
+</ScrollView>
