@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.campuspo.domain.User;
+import com.campuspo.util.Utils;
 
 public class CampusPoApplication extends Application{
 private static Context mAppContext;
@@ -14,6 +15,8 @@ private static User mUser;
 		super.onCreate();
 		// 放在最前面
 		mAppContext = getApplicationContext();
+		
+		Utils.enableStrictMode();
 		
 		
 	}

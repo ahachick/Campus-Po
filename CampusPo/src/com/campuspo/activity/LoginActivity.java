@@ -11,14 +11,17 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.campuspo.BuildConfig;
 import com.campuspo.R;
-import com.campuspo.domain.Timeline;
 import com.campuspo.service.CampusPoServiceHelper;
 import com.campuspo.service.ServiceContants;
 
@@ -26,12 +29,16 @@ public class LoginActivity extends FragmentActivity {
 
 	public static final String TAG = "LoginActivity";
 
+	private View mLogoView;
 	private EditText mEditTextEmail;
 	private EditText mEditTextPassword;
 	private Button mButtonLogin;
 	private Button mButtonRegister;
 	private TextView mTextViewForget;
-
+	private LinearLayout mContainerLayout;
+	
+	private Animation mTranslateUp;
+	
 	private CampusPoServiceHelper mServiceHelper;
 	private BroadcastReceiver mReceiver;
 
@@ -51,32 +58,36 @@ public class LoginActivity extends FragmentActivity {
 		prepareData();
 	}
 
-	/**
-	 * jump to the MainActivity if login success or has already login
-	 */
-	private void startMainActivity() {
-		Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-		this.startActivity(intent);
-		this.finish();
-	}
 	
-	/**
-	 * set "stayLogin" in SharedPreference if user logined success
-	 * @param stayLogin 
-	 */
-	public void setStayLogin(boolean stayLogin) {
-		SharedPreferences sharedPref = this.getSharedPreferences("preferences",
-				Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = sharedPref.edit();
-		editor.putBoolean("stayLogin", stayLogin);
-		editor.commit();
-	}
 
 	private void prepareData() {
 		//get the singleton of CampusPoServiceHelper
 		mServiceHelper = CampusPoServiceHelper
 				.getInstance(getApplicationContext());
+		
+		mTranslateUp = AnimationUtils.loadAnimation(this, R.anim.translate_up);
+		mTranslateUp.setAnimationListener(new AnimationListener() {
 
+			@Override
+			public void onAnimationStart(Animation animation) {
+			
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				mContainerLayout.setVisibility(View.VISIBLE);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				
+			}
+			
+		});
+		
+		mContainerLayout = (LinearLayout) findViewById(R.id.layout);
+		
+		mLogoView = findViewById(R.id.logo);
 		mEditTextEmail = (EditText) findViewById(R.id.et_email);
 		mEditTextPassword = (EditText) findViewById(R.id.et_password);
 		mButtonLogin = (Button) findViewById(R.id.btn_login);
@@ -122,11 +133,19 @@ public class LoginActivity extends FragmentActivity {
 			}
 		});
 	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		
+		
+	}
 
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		
 		
 		IntentFilter filter = new IntentFilter(
 				CampusPoServiceHelper.ACTION_REQUEST_RESULT);
@@ -164,6 +183,9 @@ public class LoginActivity extends FragmentActivity {
 		};
 
 		registerReceiver(mReceiver, filter);
+		
+		mLogoView.setAnimation(mTranslateUp);
+		mTranslateUp.start();
 
 	}
 
@@ -173,6 +195,27 @@ public class LoginActivity extends FragmentActivity {
 
 		if (mReceiver != null)
 			unregisterReceiver(mReceiver);
+	}
+	
+	/**
+	 * jump to the MainActivity if login success or has already login
+	 */
+	private void startMainActivity() {
+		Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+		this.startActivity(intent);
+		this.finish();
+	}
+	
+	/**
+	 * set "stayLogin" in SharedPreference if user logined success
+	 * @param stayLogin 
+	 */
+	public void setStayLogin(boolean stayLogin) {
+		SharedPreferences sharedPref = this.getSharedPreferences("preferences",
+				Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putBoolean("stayLogin", stayLogin);
+		editor.commit();
 	}
 
 	private String getEmail() {

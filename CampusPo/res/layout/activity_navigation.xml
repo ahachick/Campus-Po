@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.campuspo"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -9,7 +10,9 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+        
+    </FrameLayout>
     <!-- The navigation drawer -->
 
     <RelativeLayout
@@ -18,15 +21,22 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#133535" >
-        
-            
+
         <ImageView
             android:id="@+id/iv_profile_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_head_default"
-            android:layout_width="80dp"
-            android:layout_height="80dp" />
+            android:src="@drawable/ic_head_default" />
+      
+        <TextView
+            android:id="@id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_profile_icon"
+            android:text="%s"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ListView
             android:id="@id/listview"
@@ -37,5 +47,6 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp" />
     </RelativeLayout>
+
 
 </android.support.v4.widget.DrawerLayout>

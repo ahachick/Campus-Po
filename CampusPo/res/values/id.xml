@@ -23,4 +23,8 @@
     <item type="id" name="tv_participant_name" />
     <item type="id" name="tv_join_date"/>
     <item type="id" name="iv_personal_page_bg" />
+    <item type="id" name="tv_delegation_title" />
+    <item type="id" name="tv_reward_title"/>
+    <item type="id" name="tv_reward" />
+    <item type="id" name="iv_reward_icon" />
 </resources>

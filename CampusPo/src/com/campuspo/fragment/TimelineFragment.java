@@ -1,10 +1,10 @@
 package com.campuspo.fragment;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import TestData.Data;
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,7 +22,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +34,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.campuspo.BuildConfig;
 import com.campuspo.R;
@@ -49,8 +49,8 @@ import com.campuspo.service.ServiceContants;
 import com.campuspo.ui.adapter.PosterCursorAdapter;
 import com.campuspo.ui.adapter.PosterListAdapter;
 import com.campuspo.util.ImageDecoder;
+import com.campuspo.util.ImageLoader;
 import com.campuspo.util.Logger;
-import com.campuspo.util.UIUtils;
 import com.campuspo.util.Utils;
 
 public class TimelineFragment extends Fragment implements
@@ -68,8 +68,12 @@ public class TimelineFragment extends Fragment implements
 
 	private ViewPager mPager;
 	private HeadlinePagerAdapter mPagerAdapter;
+	
+	private ViewFlipper mHeadlineFlipper;
+	
 	private static int mHeadlineWidth;
 	private static int mHeadlineHeight;
+
 
 	private Timer mTimer;
 	private Handler mTimeChangedHandler;
@@ -114,10 +118,20 @@ public class TimelineFragment extends Fragment implements
 
 			mPager.setLayoutParams(new LayoutParams(mHeadlineWidth,
 					mHeadlineHeight));
+			
+			/*mHeadlineFlipper = new ViewFlipper(getActivity());
+			mHeadlineFlipper.setId(R.id.pager);
+			mHeadlineFlipper.setLayoutParams(new LayoutParams(mHeadlineWidth,
+					mHeadlineHeight));*/
 			mPagerAdapter = new HeadlinePagerAdapter(getChildFragmentManager());
+			//mHeadlineFlipper.setAdapter(mPagerAdapter);
+			//mListView.addHeaderView(mHeadlineFlipper);
 			mPager.setAdapter(mPagerAdapter);
-
 			mListView.addHeaderView(mPager);
+			
+			
+			
+			
 		}
 		mListAdapter = new PosterListAdapter(getActivity(), mPosterList);
 		mListView.setAdapter(mListAdapter);
@@ -135,7 +149,7 @@ public class TimelineFragment extends Fragment implements
 		// Set the optional menu for fragment
 
 		if (mPosterList == null)
-			mPosterList = new ArrayList<Poster>();
+			mPosterList = Data.getTimeline().getPosters();
 
 		mTimeChangedHandler = new Handler() {
 
@@ -259,10 +273,16 @@ public class TimelineFragment extends Fragment implements
 			MenuItem item = menu.getItem(1);
 			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
+		
+		menu.add(Menu.NONE, Menu.NONE, 2, "Clear");
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		if(item.getOrder() == 2) {
+			ImageLoader.getInstance(getActivity()).clearDiskCache();
+		}
 
 		switch (item.getItemId()) {
 		case R.id.action_refresh:

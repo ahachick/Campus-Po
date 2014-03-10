@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/home_background"
-    android:orientation="vertical" >
-    
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:background="@color/poster_background"
         android:padding="20dp" >
-        
+
         <ImageView
             android:id="@id/iv_profile_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/shape_bg_avatar_round"
-            android:src="@drawable/ic_head_default"/>
+            android:src="@drawable/ic_head_default" />
 
         <TextView
             android:id="@id/tv_user_screen_name"
@@ -25,9 +24,9 @@
             android:layout_alignTop="@+id/iv_profile_icon"
             android:layout_marginLeft="22dp"
             android:layout_toRightOf="@+id/iv_profile_icon"
+            android:text="纪嘉祥"
             android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:text="纪嘉祥" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_released_time"
@@ -35,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/tv_user_screen_name"
             android:layout_below="@id/tv_user_screen_name"
-            android:textColor="#ffffff"
-            android:text="两天前" />
+            android:text="两天前"
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_poster_title"
@@ -47,9 +46,9 @@
             android:text="打蓝球呀呀"
             android:textColor="#ffffff"
             android:textSize="20sp" />
-        
     </RelativeLayout>
-    
+
+   
     <android.support.v4.app.FragmentTabHost 
         android:id="@+id/tabhost"
         android:layout_width="fill_parent"
@@ -61,12 +60,11 @@
             android:layout_weight="0" />
         
     </android.support.v4.app.FragmentTabHost>
-    
+
     <FrameLayout
         android:id="@+id/fl_content"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#ffffff" />
-    
 
 </LinearLayout>

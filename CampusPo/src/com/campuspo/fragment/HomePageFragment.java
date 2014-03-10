@@ -96,16 +96,16 @@ public class HomePageFragment extends Fragment implements OnCheckedChangeListene
 				newFragment = new PublicTimelineFragment();
 			//newFragment.setRetainInstance(true);
 			ft.replace(R.id.content, newFragment, PublicTimelineFragment.TAG);
-			ft.addToBackStack(null);
+			//ft.addToBackStack(null);
 			ft.commit();
 			break;
 		case R.id.btn_focus :
-			newFragment = getChildFragmentManager().findFragmentByTag(FocusTimelineFragment.TAG);
+			newFragment = getChildFragmentManager().findFragmentByTag(DelegationFragment.TAG);
 			if(newFragment == null)
-				newFragment = new FocusTimelineFragment();
+				newFragment = new DelegationFragment();
 			//newFragment.setRetainInstance(true);
-			ft.replace(R.id.content, newFragment, FocusTimelineFragment.TAG);
-			ft.addToBackStack(null);
+			ft.replace(R.id.content, newFragment, DelegationFragment.TAG);
+			//ft.addToBackStack(null);
 			ft.commit();
 			break;
 		}		

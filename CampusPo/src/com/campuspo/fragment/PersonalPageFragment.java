@@ -1,5 +1,6 @@
 package com.campuspo.fragment;
 
+import TestData.Data;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -49,11 +50,33 @@ public class PersonalPageFragment extends Fragment implements
 
 	private ImageLoader mImageLoader;
 	private CampusPoServiceHelper mServiceHelper;
+	
+	public static PersonalPageFragment newInstance(Bundle arg) {
+		PersonalPageFragment fragment = new PersonalPageFragment();
+		fragment.setArguments(arg);
+		return fragment;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// initialize the user here from the cache/contentProvider if exists
+		
+		
+		
+		if(savedInstanceState == null) {
+			Bundle args = getArguments();
+			
+			if(null !=  args) {
+				mUser = (User) args.getSerializable("USER");
+				
+			}else {
+				mUser = Data.getUserProfile();
+			}
+			
+		}else {
+			mUser = (User) savedInstanceState.getSerializable("USER");
+		}
 
 		prepareData();
 
@@ -69,6 +92,13 @@ public class PersonalPageFragment extends Fragment implements
 		// bind id to each component
 		mImageViewProfileIcon = (ImageView) v
 				.findViewById(R.id.iv_profile_icon);
+		mImageViewProfileIcon.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				uploadProfileIcon();
+			}
+		});
 		mTextViewScreenName = (TextView) v
 				.findViewById(R.id.tv_user_screen_name);
 		mTextViewUserDescription = (TextView) v
@@ -90,6 +120,10 @@ public class PersonalPageFragment extends Fragment implements
 		populateUi();
 		// update the data
 		return v;
+	}
+
+	protected void uploadProfileIcon() {
+		Intent intent = new Intent();
 	}
 
 	public void prepareData() {
@@ -122,8 +156,10 @@ public class PersonalPageFragment extends Fragment implements
 	public void onResume() {
 		super.onResume();
 		
-		mProgressBar.setVisibility(View.VISIBLE);
-		mServiceHelper.getUserProfile();
+		//mProgressBar.setVisibility(View.VISIBLE);
+		
+		
+		
 		IntentFilter filter = new IntentFilter(
 				CampusPoServiceHelper.ACTION_REQUEST_RESULT);
 		mReceiver = new BroadcastReceiver() {
@@ -163,6 +199,11 @@ public class PersonalPageFragment extends Fragment implements
 		};
 
 		getActivity().registerReceiver(mReceiver, filter);
+		
+		if(mUser == null) {
+			mProgressBar.setVisibility(View.VISIBLE);
+			mServiceHelper.getUserProfile();
+		}
 
 	}
 
@@ -229,5 +270,14 @@ public class PersonalPageFragment extends Fragment implements
 		//startActivity(intent);
 
 	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+		outState.putSerializable("USER", mUser);
+	}
+	
+
 
 }

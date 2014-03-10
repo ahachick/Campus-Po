@@ -59,24 +59,7 @@ public class DateUtils {
 		
 		String str = sdf.format(date);
 	
-		
-		
-/*		if ( diff > 24 * 60 )
-			str="1天前";
-		else if (diff > 2 * 60 ) 
-			str="2小时前";
-		else if (diff > 1 * 60 )
-			str="1小时前";
-		else if (diff > 30 ) 
-			str="30分钟前";
-		else if (diff > 15 ) 
-			str="15分钟前";
-		else if (diff > 5) 
-			str="5分钟前";
-		else if (diff > 1 ) 
-			str="1分钟前";
-		else
-			str="刚刚";	*/			
+	
 	
 		return str;
 	}

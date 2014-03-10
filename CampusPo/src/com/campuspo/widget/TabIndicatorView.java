@@ -13,6 +13,7 @@ public class TabIndicatorView extends LinearLayout{
 	
 	private ImageView mTabIcon;
 	private TextView mTabLabel;
+	private ImageView mIndicator;
 
 	public TabIndicatorView(Context context) {
 		super(context);
