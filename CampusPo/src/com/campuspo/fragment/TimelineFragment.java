@@ -1,5 +1,6 @@
 package com.campuspo.fragment;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Timer;
@@ -57,6 +58,8 @@ public class TimelineFragment extends Fragment implements
 		LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = TimelineFragment.class.getSimpleName();
+	
+	private static final String KEY_DATA ="DATA";
 
 	private ListView mListView;
 	private PosterListAdapter mListAdapter;
@@ -80,12 +83,18 @@ public class TimelineFragment extends Fragment implements
 
 	private boolean mHasHeadline = true;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		if (BuildConfig.DEBUG)
 			Log.d(TAG, "onCreate() called");
+		
+		if(null != savedInstanceState) {
+			Log.d(TAG, "savedInstance is not null");
+			mPosterList = (List<Poster>) savedInstanceState.getSerializable(KEY_DATA);
+		}
 		prepareData();
 
 	}
@@ -143,6 +152,7 @@ public class TimelineFragment extends Fragment implements
 	}
 
 	private void prepareData() {
+		
 
 		mServiceHelper = CampusPoServiceHelper.getInstance(getActivity());
 
@@ -337,6 +347,13 @@ public class TimelineFragment extends Fragment implements
 		 * mPager.setCurrentItem((currentPos + 1) % count);
 		 */
 
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+		outState.putSerializable(KEY_DATA, (Serializable) mPosterList);
 	}
 
 	protected void refresh() {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +23,8 @@ import com.campuspo.util.Utils;
 import com.campuspo.widget.SegmentedRadioGroup;
 
 public class HomePageFragment extends Fragment implements OnCheckedChangeListener{
+	
+	public static final String TAG = HomePageFragment.class.getSimpleName();
 	
 	FragmentManager mFragmentManager;
 	
@@ -92,8 +95,11 @@ public class HomePageFragment extends Fragment implements OnCheckedChangeListene
 		switch(checkedId) {
 		case R.id.btn_lastest :
 			newFragment = getChildFragmentManager().findFragmentByTag(PublicTimelineFragment.TAG);
-			if(newFragment == null)
+			if(newFragment == null) {
+				Log.d(TAG, "child fragment is null");
 				newFragment = new PublicTimelineFragment();
+				
+			}
 			//newFragment.setRetainInstance(true);
 			ft.replace(R.id.content, newFragment, PublicTimelineFragment.TAG);
 			//ft.addToBackStack(null);
@@ -101,8 +107,10 @@ public class HomePageFragment extends Fragment implements OnCheckedChangeListene
 			break;
 		case R.id.btn_focus :
 			newFragment = getChildFragmentManager().findFragmentByTag(DelegationFragment.TAG);
-			if(newFragment == null)
+			if(newFragment == null) {
+				Log.d(TAG, "child fragment is null");
 				newFragment = new DelegationFragment();
+			}
 			//newFragment.setRetainInstance(true);
 			ft.replace(R.id.content, newFragment, DelegationFragment.TAG);
 			//ft.addToBackStack(null);

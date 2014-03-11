@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -12,7 +13,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.view.Window;
 
 import com.campuspo.R;
 import com.campuspo.fragment.HomePageFragment;
@@ -26,12 +26,16 @@ public class MainActivity extends ActionBarActivity {
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
 	private String[] mTabTitleArray;
+	
+	private FragmentManager mFragmentManger;
 
 	public static final String TAB_POS = "tab_pos";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		mFragmentManger = getSupportFragmentManager();
+		
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.pager);
 		//requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -54,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
 
 		if (savedInstanceState != null)
 			bar.setSelectedNavigationItem(savedInstanceState.getInt(TAB_POS, 0));
-		// 初始化
+
 		// prepareData();
 		// initUIComponents();
 	}
