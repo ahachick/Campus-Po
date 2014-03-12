@@ -92,6 +92,8 @@ public class ImageLoader {
 
 	public void loadImage(String url, ImageView iv) {
 
+		if(null == url)
+			return;
 		Bitmap bm = mMemoryCache.get(url);
 
 		if (bm != null)
@@ -253,14 +255,12 @@ public class ImageLoader {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (null != input) {
 				try {
 					input.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

@@ -60,6 +60,33 @@ public class ImageDecoder {
 	}
 	
 	/**
+	 * Decode and sample down a bitmap with resource id to the requested width and height.
+	 * 
+	 * @param res the context Resource
+	 * @param resId the image id
+	 * @param reqWidth The requested width of the resulting bitmap
+     * @param reqHeight The requested height of the resulting bitmap
+	 * @return	A bitmap sampled down from the original with the same aspect ratio and dimensions
+     *         that are equal to or greater than the requested width and height
+	 */
+	public Bitmap decodeSampledBitmapFromResId(Resources res, int resId, int reqWidth,
+			int reqHeight) {
+
+		BitmapFactory.Options option = new BitmapFactory.Options();
+		option.inJustDecodeBounds = false;
+
+		BitmapFactory.decodeResource(res, resId, option);
+
+		option.inSampleSize = calculateInSampleSize(option, reqWidth,
+				reqHeight);
+
+		option.inJustDecodeBounds = true;
+
+		return BitmapFactory.decodeResource(res, resId, option);
+
+	}
+	
+	/**
      * Decode and sample down a bitmap from a file input stream to the requested width and height.
      *
      * @param fileDescriptor The file descriptor to read from
@@ -134,22 +161,7 @@ public class ImageDecoder {
     }
 
     
-	public Bitmap decodeSampledBitmapFromResId(Resources res, int resId, int reqWidth,
-			int reqHeight) {
-
-		BitmapFactory.Options option = new BitmapFactory.Options();
-		option.inJustDecodeBounds = false;
-
-		BitmapFactory.decodeResource(res, resId, option);
-
-		option.inSampleSize = calculateInSampleSize(option, reqWidth,
-				reqHeight);
-
-		option.inJustDecodeBounds = true;
-
-		return BitmapFactory.decodeResource(res, resId, option);
-
-	}
+	
 
 	
 

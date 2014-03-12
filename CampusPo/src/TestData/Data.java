@@ -2,12 +2,14 @@ package TestData;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.campuspo.domain.Delegation;
 import com.campuspo.domain.Poster;
 import com.campuspo.domain.Timeline;
 import com.campuspo.domain.User;
@@ -127,6 +129,57 @@ public class Data {
 		
 		return new User(user);
 		
+	}
+	
+	public static List<Delegation> getDelegations() {
+		
+		List<Delegation> list = new ArrayList<Delegation>();
+		
+		Delegation d = new Delegation();
+		d.setProfilIconUrl( "https://lh5.googleusercontent.com/-PyY_yiyjPTo/URqunUOhHFI/AAAAAAAAAbs/azZoULNuJXc/s160-c/False%252520Kiva.jpg");
+		d.setUserScreenName("纪嘉祥");
+		d.setDelegationTitle("求Android项目组队，2-5人");
+		d.setReward("无");
+		
+		Delegation d1 = new Delegation();
+		d1.setProfilIconUrl(  "https://lh6.googleusercontent.com/-PYvLVdvXywk/URqunwd8hfI/AAAAAAAAAbs/qiMwgkFvf6I/s160-c/Fitzgerald%252520Streaks.jpg");
+		d1.setUserScreenName("渣酒");
+		d1.setDelegationTitle("求帮忙完成毕设");
+		d1.setReward("无");
+		
+		Delegation d2 = new Delegation();
+		d2.setProfilIconUrl("https://lh4.googleusercontent.com/-KIR_UobIIqY/URquoCZ9SlI/AAAAAAAAAbs/Y4d4q8sXu4c/s160-c/Foggy%252520Sunset.jpg");
+		d2.setUserScreenName("林绵程");
+		d2.setDelegationTitle("求香港代购IPAD，急急急啊~~~~~~~~~~~!");
+		d2.setReward("报酬200元");
+		
+		Delegation d3 = new Delegation();
+		d3.setProfilIconUrl("https://lh5.googleusercontent.com/-7qZeDtRKFKc/URquWZT1gOI/AAAAAAAAAbs/hqWgteyNXsg/s160-c/Another%252520Rockaway%252520Sunset.jpg");
+		d3.setUserScreenName("王二");
+		d3.setDelegationTitle("求PS高手帮忙P个图,十万火急!!!!!!!!!");
+		d3.setReward("报酬50元");
+		
+		Delegation d4 = new Delegation();
+		d4.setProfilIconUrl("https://lh3.googleusercontent.com/-6hZiEHXx64Q/URqurxvNdqI/AAAAAAAAAbs/kWMXM3o5OVI/s1024/Green%252520Grass.jpg");
+		d4.setUserScreenName("李四");
+		d4.setDelegationTitle("----------------------------------------------");
+		d4.setReward("无");
+		
+		Delegation d5= new Delegation();
+		d5.setProfilIconUrl("https://lh4.googleusercontent.com/-WIuWgVcU3Qw/URqubRVcj4I/AAAAAAAAAbs/YvbwgGjwdIQ/s160-c/Antelope%252520Walls.jpg");
+		d5.setUserScreenName("纪嘉祥");
+		d5.setDelegationTitle("................................");
+		d5.setReward("无");
+		
+		list.add(d);
+		list.add(d1);
+		list.add(d2);
+		list.add(d3);
+		list.add(d4);
+		list.add(d5);
+		
+		
+		return list;
 	}
 
 }

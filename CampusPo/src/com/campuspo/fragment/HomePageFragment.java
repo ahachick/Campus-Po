@@ -23,6 +23,8 @@ import com.campuspo.widget.SegmentedRadioGroup;
 
 public class HomePageFragment extends Fragment implements OnCheckedChangeListener{
 	
+	public static final String TAG = HomePageFragment.class.getSimpleName();
+	
 	FragmentManager mFragmentManager;
 	
 	
@@ -77,6 +79,7 @@ public class HomePageFragment extends Fragment implements OnCheckedChangeListene
 		
 		inflater.inflate(R.menu.menu_timeline_fragment, menu);
 		
+		//if build verson greater than 11, than set the item to actionbar
 		if(Utils.hasHoneycomb()) {
 			MenuItem item = menu.getItem(0);
 			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -94,18 +97,14 @@ public class HomePageFragment extends Fragment implements OnCheckedChangeListene
 			newFragment = getChildFragmentManager().findFragmentByTag(PublicTimelineFragment.TAG);
 			if(newFragment == null)
 				newFragment = new PublicTimelineFragment();
-			//newFragment.setRetainInstance(true);
 			ft.replace(R.id.content, newFragment, PublicTimelineFragment.TAG);
-			//ft.addToBackStack(null);
 			ft.commit();
 			break;
 		case R.id.btn_focus :
 			newFragment = getChildFragmentManager().findFragmentByTag(DelegationFragment.TAG);
 			if(newFragment == null)
 				newFragment = new DelegationFragment();
-			//newFragment.setRetainInstance(true);
 			ft.replace(R.id.content, newFragment, DelegationFragment.TAG);
-			//ft.addToBackStack(null);
 			ft.commit();
 			break;
 		}		

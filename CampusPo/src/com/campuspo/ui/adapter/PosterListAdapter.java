@@ -75,7 +75,7 @@ public class PosterListAdapter extends BaseAdapter {
 
 		// set the value to each ui component;
 		Poster poster = (Poster) getItem(position);
-		// hold image asynchronously here
+		// load image asynchronously here
 		mImageLoader.loadImage(poster.getProfileIconUrl(),
 				 	holder.ivProfileIcon);
 		holder.tvSponserName.setText(poster.getUserScreenName());

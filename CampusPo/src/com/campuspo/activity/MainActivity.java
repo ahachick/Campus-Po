@@ -45,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
 
+		//Add tabs to Actionbar
 		mTabsAdapter.addTab(bar.newTab().setText(mTabTitleArray[0]), 
 				HomePageFragment.class, null);
 		mTabsAdapter.addTab(bar.newTab().setText(mTabTitleArray[1]),
@@ -52,6 +53,7 @@ public class MainActivity extends ActionBarActivity {
 		mTabsAdapter.addTab(bar.newTab().setText(mTabTitleArray[2]),
 				PersonalPageFragment.class, null);
 
+		//retain the state from "savedInstanceState"
 		if (savedInstanceState != null)
 			bar.setSelectedNavigationItem(savedInstanceState.getInt(TAB_POS, 0));
 		// 初始化
