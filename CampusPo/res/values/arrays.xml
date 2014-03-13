@@ -8,9 +8,10 @@
     
     <string-array name="list_title">
         <item>@string/community_trends</item>
-        <item>@string/lost_and_found</item>
-        <item>@string/campus_news</item>
+        <item>@string/delegation</item>
+        <item>@string/campus_market</item>
     </string-array>
+    
     
     <string-array name="action_poster_list">
         <item>sponser</item>

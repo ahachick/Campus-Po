@@ -6,4 +6,5 @@
      <color name="poster_icon_stroke">#6cc5ab</color>
      <color name="poster_background">#c4dd79</color>
      <color name="base_color">#c4dd79</color>
+     <color name="user_screen_name">#cd8549</color>
 </resources>

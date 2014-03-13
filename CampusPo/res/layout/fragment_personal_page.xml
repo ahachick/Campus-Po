@@ -38,7 +38,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
            
-            android:textColor="#cd8549"
+            android:textColor="@color/user_screen_name"
             android:textSize="15sp"
             android:textStyle="italic" />
 

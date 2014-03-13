@@ -9,6 +9,7 @@
         android:id="@+id/iv_special_title"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
         android:src="@color/base_color" />
 
     <TextView
@@ -18,6 +19,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="TextView" />
     
 </RelativeLayout>

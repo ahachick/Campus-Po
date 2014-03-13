@@ -50,11 +50,12 @@
             android:value="com.campuspo.activity.MainActivity" />
         </activity>
         
+        <activity
+            android:name="com.campuspo.activity.DelegationActivity" />
         <activity 
-            android:name="com.campuspo.activity.PublishPosterActivity"></activity>
+            android:name="com.campuspo.activity.PublishPosterActivity" />
         <activity 
-            android:name="com.campuspo.activity.PersonalPosterActivity"></activity>
-        
+            android:name="com.campuspo.activity.PersonalPosterActivity"/>
         <provider 
             android:name="com.campuspo.provider.PublicTimelineProvider"
             android:authorities="com.campuspoe.provider.PublicTimelineProvider"

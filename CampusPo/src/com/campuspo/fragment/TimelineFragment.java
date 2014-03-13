@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -123,19 +124,13 @@ public class TimelineFragment extends Fragment implements
 
 			mPager = new ViewPager(getActivity());
 			mPager.setId(R.id.pager);
-			// mPager.setp(UIUtils.dip2Pixel(10));
-
 			mPager.setLayoutParams(new LayoutParams(mHeadlineWidth,
 					mHeadlineHeight));
 			
-			/*mHeadlineFlipper = new ViewFlipper(getActivity());
-			mHeadlineFlipper.setId(R.id.pager);
-			mHeadlineFlipper.setLayoutParams(new LayoutParams(mHeadlineWidth,
-					mHeadlineHeight));*/
 			mPagerAdapter = new HeadlinePagerAdapter(getChildFragmentManager());
-			//mHeadlineFlipper.setAdapter(mPagerAdapter);
-			//mListView.addHeaderView(mHeadlineFlipper);
 			mPager.setAdapter(mPagerAdapter);
+			
+			//Set the view pager to listview 
 			mListView.addHeaderView(mPager);
 			
 			
@@ -145,8 +140,9 @@ public class TimelineFragment extends Fragment implements
 		mListAdapter = new PosterListAdapter(getActivity(), mPosterList);
 		mListView.setAdapter(mListAdapter);
 
-		
+		//new CursorAdapter
 		// mCursorAdapter = new PosterCursorAdapter(getActivity(), null, true);
+		//set adapter to listview
 		// mListView.setAdapter(mCursorAdapter);
 		return mListView;
 	}
@@ -172,6 +168,7 @@ public class TimelineFragment extends Fragment implements
 		// create a timer for transfering headlines
 		mTimer = new Timer();
 
+		//if FLAG - mHasHeadline is true,than calculate the headline's width and height
 		if (mHasHeadline) {
 			mHeadlineWidth = getActivity().getResources().getDisplayMetrics().widthPixels;
 			mHeadlineHeight = mHeadlineWidth * 3 / (4 + 3);
@@ -226,7 +223,8 @@ public class TimelineFragment extends Fragment implements
 
 		};
 
-		this.getActivity().registerReceiver(mRequestReceiver, filter);
+		//register the broadcast receiver 
+		LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mRequestReceiver, filter);
 
 		/*
 		 * mTimer.schedule(new TimerTask() {
@@ -244,8 +242,9 @@ public class TimelineFragment extends Fragment implements
 		super.onPause();
 
 		if (mRequestReceiver != null)
-			this.getActivity().unregisterReceiver(mRequestReceiver);
+			LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mRequestReceiver);
 
+		//Stop the timer
 		mTimer.purge();
 	}
 
@@ -283,8 +282,8 @@ public class TimelineFragment extends Fragment implements
 			MenuItem item = menu.getItem(1);
 			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
-		
-		menu.add(Menu.NONE, Menu.NONE, 2, "Clear");
+		//for test ,have to delete
+		menu.add(Menu.NONE, Menu.NONE, 2, "清楚缓存");
 	}
 
 	@Override
@@ -373,7 +372,7 @@ public class TimelineFragment extends Fragment implements
 
 		@Override
 		public int getCount() {
-			return 3;
+			return 1;
 		}
 
 	}

@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
-    android:layout_height="160dp"
-    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
     android:gravity="center_horizontal"
-    android:background="#eee"
+    android:background="@drawable/news_item_bg"
     android:orientation="vertical" >
     
     
     <ImageView
         android:id="@id/iv_profile_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_head_default"/>
+    
+    <TextView
+        android:id="@id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/user_screen_name"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="%s"/>
     
     <TextView
         android:id="@id/tv_delegation_title"
@@ -20,12 +29,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="求一人帮忙完成比设"/>
+        android:text="%s"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="5dp"
-        android:background="#aaa" />
+        android:background="#ccc" />
     <TextView
         android:id="@id/tv_reward"
         android:layout_marginTop="5dp"
