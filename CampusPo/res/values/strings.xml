@@ -29,6 +29,8 @@
     <string name="publish">发布</string>
     <string name="cancel">取消</string>
     <string name="save_as_draft_or_not">是否保存为草稿</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="clear_cache_after_exit">清除缓存在每次软件退出后</string>
     
     
     <string name="ptr_pull_to_refresh">Pull to refresh</string>

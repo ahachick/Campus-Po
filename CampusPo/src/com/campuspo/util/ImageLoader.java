@@ -113,7 +113,13 @@ public class ImageLoader {
 	 * Clear bitmap cache in the disk;
 	 */
 	public void clearDiskCache() {
-		mDiskCache.clear();
+		
+		if(null != mMemoryCache) {
+			mMemoryCache.evictAll();
+		}
+		
+		if(null != mDiskCache)
+			mDiskCache.clear();
 	}
 	
 	

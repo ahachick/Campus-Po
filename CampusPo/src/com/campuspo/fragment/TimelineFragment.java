@@ -42,6 +42,7 @@ import com.campuspo.BuildConfig;
 import com.campuspo.R;
 import com.campuspo.activity.PosterActivity;
 import com.campuspo.activity.PublishPosterActivity;
+import com.campuspo.activity.SettingActivity;
 import com.campuspo.domain.Poster;
 import com.campuspo.domain.Timeline;
 import com.campuspo.provider.PublicTimelineProviderMetaData;
@@ -282,17 +283,15 @@ public class TimelineFragment extends Fragment implements
 			MenuItem item = menu.getItem(1);
 			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
+		
 		//for test ,have to delete
-		menu.add(Menu.NONE, Menu.NONE, 2, "清楚缓存");
+		//menu.add(Menu.NONE, Menu.NONE, 2, "清楚缓存");
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
-		if(item.getOrder() == 2) {
-			ImageLoader.getInstance(getActivity()).clearDiskCache();
-		}
-
+		Intent intent = null;
 		switch (item.getItemId()) {
 		case R.id.action_refresh:
 
@@ -301,9 +300,14 @@ public class TimelineFragment extends Fragment implements
 			mServiceHelper.getPublicTimeline();
 			break;
 		case R.id.action_edit:
-			Intent intent = new Intent(getActivity(),
+			intent = new Intent(getActivity(),
 					PublishPosterActivity.class);
 			startActivity(intent);
+			break;
+		case R.id.action_settings:
+			intent = new Intent(getActivity(), SettingActivity.class);
+			startActivity(intent);
+			break;
 		default:
 		}
 

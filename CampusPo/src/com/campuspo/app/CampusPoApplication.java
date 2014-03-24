@@ -13,7 +13,6 @@ private static User mUser;
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		// 放在最前面
 		mAppContext = getApplicationContext();
 		
 		Utils.enableStrictMode();
@@ -32,4 +31,6 @@ private static User mUser;
 	public static User getUser(){
 		return mUser;
 	}
+	
+	
 }

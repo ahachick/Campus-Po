@@ -2,8 +2,12 @@ package com.campuspo.activity;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,14 +19,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
 import com.campuspo.R;
+import com.campuspo.app.CampusPoApplication;
 import com.campuspo.fragment.HomePageFragment;
 import com.campuspo.fragment.PersonalPageFragment;
 import com.campuspo.fragment.SpecialPageFragment;
+import com.campuspo.util.ImageLoader;
+import com.campuspo.util.Logger;
 
 public class MainActivity extends ActionBarActivity {
 
 	public static final String TAG = "MainActivity";
 
+	public static final String KEY_PREF_CLEAR_CACHE = "pref_clear_cache";
+	
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
 	private String[] mTabTitleArray;
@@ -166,5 +175,34 @@ public class MainActivity extends ActionBarActivity {
 		}
 
 	}
+
+	@Override
+	public void onBackPressed() {
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+		builder.setMessage("Exit?")	
+			
+			.setPositiveButton(android.R.string.ok,
+					new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					SharedPreferences pref = 
+							PreferenceManager.getDefaultSharedPreferences(
+									MainActivity.this);
+					
+					boolean clearCache = pref.getBoolean(KEY_PREF_CLEAR_CACHE, false);
+					Logger.debug(TAG, String.valueOf(clearCache));
+					if(clearCache){
+						ImageLoader.getInstance(getApplicationContext()).clearDiskCache();
+					}
+					MainActivity.this.finish();
+				}		
+			})
+			.setNegativeButton(android.R.string.cancel, null);
+		builder.create().show();
+	}
+	
 
 }

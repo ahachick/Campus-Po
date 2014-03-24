@@ -8,6 +8,7 @@
     <item type="id" name="gridview" />
     <item type="id" name="viewpager" />
     <item type="id" name="progressbar"/>
+    <item type="id" name="fragment" />
 	<item type="id" name="fragment_container"/>    
     <!-- 项目使用 -->
     <item type="id" name="iv_profile_icon" />
