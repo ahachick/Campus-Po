@@ -13,6 +13,7 @@ import com.campuspo.domain.Poster;
 
 public class PosterDetailFragment extends Fragment{
 	
+	@SuppressWarnings("unused")
 	private static final String TAG = PosterDetailFragment.class.getSimpleName();
 	
 	private Poster mPoster;

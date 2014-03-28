@@ -6,13 +6,9 @@ import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.campuspo.BuildConfig;
-
-import android.util.Log;
 
 public class Poster extends Entity implements java.io.Serializable {
 	
-	private static final String TAG = "Poster";
 
 	/**
 	 * 

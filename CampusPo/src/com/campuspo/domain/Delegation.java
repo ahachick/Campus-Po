@@ -1,6 +1,5 @@
 package com.campuspo.domain;
 
-import java.text.ParseException;
 
 import org.json.JSONException;
 import org.json.JSONObject;

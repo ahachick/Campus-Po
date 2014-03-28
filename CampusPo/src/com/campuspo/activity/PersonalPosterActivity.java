@@ -10,10 +10,10 @@ import android.widget.SpinnerAdapter;
 
 import com.campuspo.R;
 import com.campuspo.fragment.SponserPosterFragment;
-import com.campuspo.util.ImageLoader;
 
 public class PersonalPosterActivity extends ActionBarActivity{
 	
+	@SuppressWarnings("unused")
 	private static final String TAG = PersonalPosterActivity.class.getSimpleName();
 	
 	public OnNavigationListener mNavigationListener;

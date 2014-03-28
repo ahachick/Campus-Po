@@ -74,7 +74,6 @@ public class TimelineFragment extends Fragment implements
 	private ViewPager mPager;
 	private HeadlinePagerAdapter mPagerAdapter;
 	
-	private ViewFlipper mHeadlineFlipper;
 	
 	private static int mHeadlineWidth;
 	private static int mHeadlineHeight;
@@ -384,7 +383,6 @@ public class TimelineFragment extends Fragment implements
 	public static class HeadlineFragment extends Fragment {
 
 		// @SuppressWarnings("unused")
-		// private String TAG = HeadlineFragment.class.getSimpleName();
 
 		private static final String POSTION = "position";
 

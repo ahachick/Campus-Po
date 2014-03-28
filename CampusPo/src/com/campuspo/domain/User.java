@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 public class User extends Entity implements java.io.Serializable{
 
+	@SuppressWarnings("unused")
 	private static final String TAG = "User";
 	/**
 	 * 

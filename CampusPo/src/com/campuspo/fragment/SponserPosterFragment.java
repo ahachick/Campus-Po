@@ -3,7 +3,6 @@ package com.campuspo.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import TestData.Data;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

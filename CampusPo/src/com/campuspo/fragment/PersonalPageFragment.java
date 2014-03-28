@@ -123,7 +123,6 @@ public class PersonalPageFragment extends Fragment implements
 	}
 
 	protected void uploadProfileIcon() {
-		Intent intent = new Intent();
 	}
 
 	public void prepareData() {

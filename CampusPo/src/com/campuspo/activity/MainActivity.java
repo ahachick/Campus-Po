@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -19,7 +18,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
 import com.campuspo.R;
-import com.campuspo.app.CampusPoApplication;
 import com.campuspo.fragment.HomePageFragment;
 import com.campuspo.fragment.PersonalPageFragment;
 import com.campuspo.fragment.SpecialPageFragment;
@@ -36,14 +34,12 @@ public class MainActivity extends ActionBarActivity {
 	private TabsAdapter mTabsAdapter;
 	private String[] mTabTitleArray;
 	
-	private FragmentManager mFragmentManger;
 
 	public static final String TAB_POS = "tab_pos";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		mFragmentManger = getSupportFragmentManager();
 		
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.pager);

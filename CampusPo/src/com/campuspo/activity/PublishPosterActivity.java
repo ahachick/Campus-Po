@@ -16,6 +16,7 @@ import com.campuspo.service.CampusPoServiceHelper;
 
 public class PublishPosterActivity extends ActionBarActivity {
 	
+	@SuppressWarnings("unused")
 	private static final String TAG = PublishPosterActivity.class
 			.getSimpleName();
 

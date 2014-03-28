@@ -19,6 +19,7 @@ import com.campuspo.util.ImageLoader;
 
 public class PosterActivity extends ActionBarActivity{
 	
+	@SuppressWarnings("unused")
 	private static final String TAG = PosterActivity.class.getSimpleName();
 	
 	public static final String KEY_DATA = "POSTER";
