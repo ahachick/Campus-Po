@@ -1,10 +1,12 @@
 package com.campuspo.fragment;
 
 import TestData.Data;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -28,6 +30,7 @@ import com.campuspo.domain.User;
 import com.campuspo.service.CampusPoServiceHelper;
 import com.campuspo.service.ServiceContants;
 import com.campuspo.util.ImageLoader;
+import com.campuspo.util.Utils;
 
 public class PersonalPageFragment extends Fragment implements
 		View.OnClickListener {
@@ -217,13 +220,16 @@ public class PersonalPageFragment extends Fragment implements
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		
+
 		super.onCreateOptionsMenu(menu, inflater);
-		
+
 		inflater.inflate(R.menu.menu_timeline_fragment, menu);
-		
-		MenuItem item = menu.getItem(0);
-		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+
+		MenuItemCompat.setShowAsAction(menu.findItem(R.id.action_edit),
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		MenuItemCompat.setShowAsAction(menu.findItem(R.id.action_refresh),
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+
 	}
 	
 	@Override
@@ -239,7 +245,6 @@ public class PersonalPageFragment extends Fragment implements
 			break;
 		default:
 		}
-		
 		
 		return super.onOptionsItemSelected(item);
 	}

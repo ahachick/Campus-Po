@@ -9,7 +9,10 @@
     <item type="id" name="viewpager" />
     <item type="id" name="progressbar"/>
     <item type="id" name="fragment" />
-	<item type="id" name="fragment_container"/>    
+	<item type="id" name="fragment_container"/>
+	<item type="id" name="btn_ok"/>
+	<item type="id" name="btn_cancel"/>
+	
     <!-- 项目使用 -->
     <item type="id" name="iv_profile_icon" />
     <item type="id" name="tv_user_screen_name" />
@@ -25,6 +28,11 @@
     <item type="id" name="tv_join_date"/>
     <item type="id" name="iv_personal_page_bg" />
     <item type="id" name="tv_delegation_title" />
+    <item type="id" name="tv_delegation_description" />
+    <item type="id" name="et_delegation_title" />
+    <item type="id" name="et_delegation_description" />
+    <item type="id" name="tv_deadline" />
+    <item type="id" name="et_reward" />
     <item type="id" name="tv_reward_title"/>
     <item type="id" name="tv_reward" />
     <item type="id" name="iv_reward_icon" />

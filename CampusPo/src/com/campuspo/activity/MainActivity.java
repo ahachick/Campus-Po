@@ -36,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
 	
 
 	public static final String TAB_POS = "tab_pos";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,6 +66,8 @@ public class MainActivity extends ActionBarActivity {
 		//retain the state from "savedInstanceState"
 		if (savedInstanceState != null)
 			bar.setSelectedNavigationItem(savedInstanceState.getInt(TAB_POS, 0));
+		
+		//bar.setSelectedNavigationItem(arg0)
 
 		// prepareData();
 		// initUIComponents();
@@ -159,6 +162,7 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		public Fragment getItem(int pos) {
 
+			Logger.debug(TAG, "getItem()...");
 			TabInfo info = mTabInfoList.get(pos);
 
 			return Fragment.instantiate(mContext, info.mClass.getName(),

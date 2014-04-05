@@ -137,16 +137,18 @@ public class JSONUtils {
         return null;
     }
     
-    public static <T> T toEntity(Class<T> className, JSONObject jsonObject ) throws InstantiationException, IllegalAccessException, JSONException {
-    	T entity = (T) className.newInstance();
-    	Field[] fields = className.getDeclaredFields();
+    public static Object toEntity(String className, JSONObject jsonObject ) throws InstantiationException, IllegalAccessException, JSONException, ClassNotFoundException {
+    	
+    	Class<?> clz = Class.forName(className);
+    	Object entity = clz.newInstance();
+    	Field[] fields = clz.getDeclaredFields();
     	for(Field fd : fields) {
     		//判断属性是否可见，若不可见，刚设为可见
     		if(!fd.isAccessible()) 
     			fd.setAccessible(true);
     		
-    		for(Iterator interator = jsonObject.keys(); interator.hasNext();) {
-    			String key = (String) interator.next();
+    		for(Iterator<?> iterator = jsonObject.keys(); iterator.hasNext();) {
+    			String key = (String) iterator.next();
     			if(fd.getName().equals(key)) {
     				
     				String value = jsonObject.get(key).toString();

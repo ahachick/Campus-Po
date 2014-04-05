@@ -89,6 +89,7 @@ public class TimelineFragment extends Fragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		//setRetainInstance(true);
 		if (BuildConfig.DEBUG)
 			Log.d(TAG, "onCreate() called");
 		
@@ -266,7 +267,7 @@ public class TimelineFragment extends Fragment implements
 	}
 
 	// =============have to modify
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+/*	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -285,7 +286,7 @@ public class TimelineFragment extends Fragment implements
 		
 		//for test ,have to delete
 		//menu.add(Menu.NONE, Menu.NONE, 2, "清楚缓存");
-	}
+	}*/
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
