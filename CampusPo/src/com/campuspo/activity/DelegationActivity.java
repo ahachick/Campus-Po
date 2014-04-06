@@ -7,6 +7,7 @@ import TestData.Data;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -87,9 +88,12 @@ public class DelegationActivity extends ActionBarActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		getMenuInflater().inflate(R.menu.menu_timeline_fragment, menu);
-		// MenuItem item = menu.add(getResources().getString(R.string.publish));
-		// MenuItemCompat item = new MenuItemCompat();
-		// item.setIcon(getResources().getDrawable(R.id.action_edit));
+		
+		MenuItemCompat.setShowAsAction(menu.findItem(R.id.action_edit),
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		MenuItemCompat.setShowAsAction(menu.findItem(R.id.action_refresh),
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		
 		return super.onCreateOptionsMenu(menu);
 	}
 

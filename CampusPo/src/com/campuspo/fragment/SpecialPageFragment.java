@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.campuspo.R;
 import com.campuspo.activity.DelegationActivity;
 import com.campuspo.activity.ScreenSlideActivity;
+import com.campuspo.activity.UmbrellaActivity;
 import com.campuspo.util.ImageDecoder;
 
 public class SpecialPageFragment extends Fragment {
@@ -64,6 +65,10 @@ public class SpecialPageFragment extends Fragment {
 
 				case 1:
 					intent = new Intent(getActivity(), DelegationActivity.class);
+					break;
+				case 3:
+					intent = new Intent(getActivity(), UmbrellaActivity.class);
+					break;
 				default:
 
 				}
@@ -132,6 +137,9 @@ public class SpecialPageFragment extends Fragment {
 				break;
 			case 2:
 				imageId = R.drawable.ic_market;
+				break;
+			case 3:
+				imageId = R.drawable.ic_umbrella;
 				break;
 			default:
 

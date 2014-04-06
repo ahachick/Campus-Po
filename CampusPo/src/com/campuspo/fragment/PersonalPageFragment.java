@@ -53,7 +53,7 @@ public class PersonalPageFragment extends Fragment implements
 
 	private ImageLoader mImageLoader;
 	private CampusPoServiceHelper mServiceHelper;
-	
+
 	public static PersonalPageFragment newInstance(Bundle arg) {
 		PersonalPageFragment fragment = new PersonalPageFragment();
 		fragment.setArguments(arg);
@@ -64,20 +64,18 @@ public class PersonalPageFragment extends Fragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// initialize the user here from the cache/contentProvider if exists
-		
-		
-		
-		if(savedInstanceState == null) {
+
+		if (savedInstanceState == null) {
 			Bundle args = getArguments();
-			
-			if(null !=  args) {
+
+			if (null != args) {
 				mUser = (User) args.getSerializable("USER");
-				
-			}else {
+
+			} else {
 				mUser = Data.getUserProfile();
 			}
-			
-		}else {
+
+		} else {
 			mUser = (User) savedInstanceState.getSerializable("USER");
 		}
 
@@ -96,7 +94,7 @@ public class PersonalPageFragment extends Fragment implements
 		mImageViewProfileIcon = (ImageView) v
 				.findViewById(R.id.iv_profile_icon);
 		mImageViewProfileIcon.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				uploadProfileIcon();
@@ -106,7 +104,7 @@ public class PersonalPageFragment extends Fragment implements
 				.findViewById(R.id.tv_user_screen_name);
 		mTextViewUserDescription = (TextView) v
 				.findViewById(R.id.tv_user_description);
-		
+
 		mProgressBar = (ProgressBar) v.findViewById(R.id.progressbar);
 		mButtonSkill = (Button) v.findViewById(R.id.btn_skill);
 		mButtonPoster = (Button) v.findViewById(R.id.btn_poster);
@@ -139,9 +137,9 @@ public class PersonalPageFragment extends Fragment implements
 	private void populateUi() {
 
 		if (mUser != null) {
-			
-			if(BuildConfig.DEBUG)
-				Log.d(TAG,"populating...");
+
+			if (BuildConfig.DEBUG)
+				Log.d(TAG, "populating...");
 			mTextViewScreenName.setText(mUser.getUserScreenName());
 			mTextViewUserDescription.setText(mUser.getUserDescription());
 
@@ -152,16 +150,12 @@ public class PersonalPageFragment extends Fragment implements
 		}
 	}
 
-	
-
 	@Override
 	public void onResume() {
 		super.onResume();
-		
-		//mProgressBar.setVisibility(View.VISIBLE);
-		
-		
-		
+
+		// mProgressBar.setVisibility(View.VISIBLE);
+
 		IntentFilter filter = new IntentFilter(
 				CampusPoServiceHelper.ACTION_REQUEST_RESULT);
 		mReceiver = new BroadcastReceiver() {
@@ -173,18 +167,20 @@ public class PersonalPageFragment extends Fragment implements
 						ServiceContants.REQUEST_TYPE, -1);
 
 				if (requestType == ServiceContants.REQUEST_PROFILE) {
-					if(BuildConfig.DEBUG)
+					if (BuildConfig.DEBUG)
 						Log.d(TAG, "receive result");
-					
+
 					int code = intent.getIntExtra(
 							CampusPoServiceHelper.REQUEST_RESULT_CODE, -1);
-					Bundle data = intent.getBundleExtra(CampusPoServiceHelper.REQUEST_RESULT_DATA);
-					if(BuildConfig.DEBUG)
+					Bundle data = intent
+							.getBundleExtra(CampusPoServiceHelper.REQUEST_RESULT_DATA);
+					if (BuildConfig.DEBUG)
 						Log.d(TAG, "fetch finished" + code);
 					if (code == 1) {
-						
-						mUser = (User) data.getSerializable(ServiceContants.RESULT_SERIALIZABLE);
-						
+
+						mUser = (User) data
+								.getSerializable(ServiceContants.RESULT_SERIALIZABLE);
+
 						populateUi();
 					} else if (code == 0) {
 						String errorMsg = intent
@@ -201,8 +197,8 @@ public class PersonalPageFragment extends Fragment implements
 		};
 
 		getActivity().registerReceiver(mReceiver, filter);
-		
-		if(mUser == null) {
+
+		if (mUser == null) {
 			mProgressBar.setVisibility(View.VISIBLE);
 			mServiceHelper.getUserProfile();
 		}
@@ -216,7 +212,6 @@ public class PersonalPageFragment extends Fragment implements
 			getActivity().unregisterReceiver(mReceiver);
 		}
 	}
-	
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -231,24 +226,23 @@ public class PersonalPageFragment extends Fragment implements
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		switch(item.getItemId()) {
-		case R.id.action_refresh :
-			
-			if(BuildConfig.DEBUG)
+
+		switch (item.getItemId()) {
+		case R.id.action_refresh:
+
+			if (BuildConfig.DEBUG)
 				Log.d(TAG, "send request for user profile--begin");
 			mProgressBar.setVisibility(View.VISIBLE);
 			mServiceHelper.getUserProfile();
 			break;
 		default:
 		}
-		
+
 		return super.onOptionsItemSelected(item);
 	}
-	
 
 	@Override
 	public void onClick(View v) {
@@ -271,17 +265,15 @@ public class PersonalPageFragment extends Fragment implements
 			break;
 		}
 
-		//startActivity(intent);
+		// startActivity(intent);
 
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		
+
 		outState.putSerializable("USER", mUser);
 	}
-	
-
 
 }
