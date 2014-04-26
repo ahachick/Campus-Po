@@ -1,12 +1,10 @@
 package com.campuspo.fragment;
 
 import TestData.Data;
-import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -30,7 +28,6 @@ import com.campuspo.domain.User;
 import com.campuspo.service.CampusPoServiceHelper;
 import com.campuspo.service.ServiceContants;
 import com.campuspo.util.ImageLoader;
-import com.campuspo.util.Utils;
 
 public class PersonalPageFragment extends Fragment implements
 		View.OnClickListener {
@@ -133,6 +130,22 @@ public class PersonalPageFragment extends Fragment implements
 		mImageLoader.setDefaultBitmap(R.drawable.ic_head_default);
 		mServiceHelper = CampusPoServiceHelper.getInstance(getActivity());
 	}
+	
+	/*@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public void setButtonsShape() {
+		
+		ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
+		drawable.getPaint().setColor(0xfff365cb);
+		
+		int l = (int) (mButtonSkill.getX()- mButtonSkill.getWidth()/2);
+		int t = (int) (mButtonSkill.getY() -  mButtonSkill.getHeight()/2);
+		int r = (int) (mButtonSkill.getX()+ mButtonSkill.getWidth()/2);
+		int b = (int) (mButtonSkill.getY() +  mButtonSkill.getHeight()/2);
+		
+		drawable.setBounds(l, t, r, b);
+		mButtonSkill.setBackgroundDrawable(drawable);
+		//sd.set
+	}*/
 
 	private void populateUi() {
 

@@ -37,6 +37,8 @@
     <string name="delegation_description">委托内容</string>
     <string name="reward">报酬</string>
     <string name="deadline">截止至：%1$d年%2$d月%3$d日</string>
+    <string name="date_of_big_poster">%s.PO</string>
+    <string name="community_broad">社团宣传栏</string>
     <string name="NULL"></string>
     
     <string name="publish">发布</string>

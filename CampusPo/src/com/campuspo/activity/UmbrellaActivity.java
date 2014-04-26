@@ -3,9 +3,18 @@ package com.campuspo.activity;
 import java.util.LinkedList;
 import java.util.WeakHashMap;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.campuspo.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,7 +49,7 @@ public class UmbrellaActivity extends ActionBarActivity {
 
 		mMap = mMapFragment.getMap();
 
-		mMap.setMyLocationEnabled(true);
+		// mMap.setMyLocationEnabled(true);
 
 		mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
@@ -74,10 +83,13 @@ public class UmbrellaActivity extends ActionBarActivity {
 		refreshMarkerData();
 	}
 
+	// Test Data
 	public void prepareData() {
 		mInfoList = new LinkedList<HelpInfo>();
-		mInfoList.add(new HelpInfo(0, 51.5072, -0.5275, HelpInfo.FLAG_FOR_HELP));
-		mInfoList.add(new HelpInfo(0, 52.5072, -0.9275, HelpInfo.FLAG_FOR_HELP));
+		mInfoList
+				.add(new HelpInfo(0, 51.5072, -0.5275, HelpInfo.FLAG_FOR_HELP));
+		mInfoList
+				.add(new HelpInfo(0, 52.5072, -0.9275, HelpInfo.FLAG_FOR_HELP));
 		mInfoList.add(new HelpInfo(0, 56.5072, -0.8275, HelpInfo.FLAG_TO_HELP));
 		mInfoList.add(new HelpInfo(0, 59.5072, -0.5275, HelpInfo.FLAG_TO_HELP));
 		mInfoList.add(new HelpInfo(0, 54.5072, -0.2275, HelpInfo.FLAG_TO_HELP));
@@ -92,12 +104,23 @@ public class UmbrellaActivity extends ActionBarActivity {
 				LatLng ll = new LatLng(info.mLatitude, info.mLongtitude);
 				int bmpId = (info.mFlag == HelpInfo.FLAG_FOR_HELP) ? R.drawable.map_pin_holed_purple_normal
 						: R.drawable.map_pin_holed_blue_normal;
-				Marker marker = mMap.addMarker(new MarkerOptions().position(ll).title("Dummy").snippet("Dummy")
+				Marker marker = mMap.addMarker(new MarkerOptions().position(ll)
+						.title("Dummy").snippet("Dummy")
 						.icon(BitmapDescriptorFactory.fromResource(bmpId)));
 				mMarkers.put(marker, info);
 			}
 
 		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		MenuItem item = menu.add(0, R.id.menu_toggle, 0, "Toggle");
+
+		MenuItemCompat.setShowAsAction(item,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -112,6 +135,24 @@ public class UmbrellaActivity extends ActionBarActivity {
 		// mMapView.onStop();
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+		case R.id.menu_toggle:
+			handleToggle();
+			break;
+		default:
+
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
+	public void handleToggle() {
+		new HelpInfoFragment().show(getSupportFragmentManager(), HelpInfoFragment.class.getSimpleName());
+	}
+	
 	private static class HelpInfo {
 
 		public static final int FLAG_FOR_HELP = 0;
@@ -127,6 +168,36 @@ public class UmbrellaActivity extends ActionBarActivity {
 			mLongtitude = lng;
 			mFlag = flag;
 		}
+	}
+	
+	public static class HelpInfoFragment extends DialogFragment {
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			
+			LayoutInflater inflater = getActivity().getLayoutInflater();;
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setPositiveButton(R.string.confirm, new Dialog.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+				}
+				
+			}).setNegativeButton(R.string.cancel, new Dialog.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+				}
+				
+			}).setView(inflater.inflate(R.layout.dialog_helpinfo, null));
+			return builder.create();
+		}
+		
+		
+		
 	}
 
 	/*

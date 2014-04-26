@@ -18,7 +18,7 @@
             android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop"
-            android:src="#c4dd79" />
+            android:src="@color/user_background" />
 
         <ImageView
             android:id="@id/iv_profile_icon"
@@ -73,10 +73,12 @@
        	    android:layout_height="wrap_content"
             android:gravity="center"
             android:minWidth="50dp"
+            android:layout_margin="5dp"
             android:padding="5dp"
             android:text="L"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/radio_colors" />
+            android:textColor="@color/radio_colors"
+            android:background="@drawable/icon_bg" />
 
         <Button
             android:id="@+id/btn_poster"
@@ -85,7 +87,9 @@
             android:gravity="center"
             android:minWidth="50dp"
             android:padding="5dp"
+             android:layout_margin="5dp"
             android:text="P"
+            android:background="@drawable/icon_bg"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/radio_colors" />
 
@@ -96,7 +100,9 @@
             android:gravity="center"
             android:minWidth="50dp"
             android:padding="5dp"
+             android:layout_margin="5dp"
             android:text="F"
+            android:background="@drawable/icon_bg"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/radio_colors" />
 
@@ -107,7 +113,9 @@
             android:gravity="center"
             android:minWidth="50dp"
             android:padding="5dp"
+             android:layout_margin="5dp"
             android:text="M"
+            android:background="@drawable/icon_bg"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/radio_colors" />
 
@@ -118,7 +126,9 @@
             android:gravity="center"
             android:minWidth="50dp"
             android:padding="5dp"
+             android:layout_margin="5dp"
             android:text="D"
+            android:background="@drawable/icon_bg"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/radio_colors" />
     </LinearLayout>

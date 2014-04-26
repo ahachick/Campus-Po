@@ -36,4 +36,7 @@
     <item type="id" name="tv_reward_title"/>
     <item type="id" name="tv_reward" />
     <item type="id" name="iv_reward_icon" />
+    
+    <!-- For Menu -->
+    <item type="id" name="menu_toggle"/>
 </resources>
