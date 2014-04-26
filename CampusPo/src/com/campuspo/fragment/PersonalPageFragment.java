@@ -32,6 +32,7 @@ import com.campuspo.util.ImageLoader;
 import com.eric.android.http.AsyncHttpExecutor;
 import com.eric.android.util.Logger;
 
+
 public class PersonalPageFragment extends Fragment implements
 		View.OnClickListener {
 
@@ -159,6 +160,22 @@ public class PersonalPageFragment extends Fragment implements
 		mImageLoader.setDefaultBitmap(R.drawable.ic_head_default);
 		//mServiceHelper = CampusPoServiceHelper.getInstance(getActivity());
 	}
+	
+	/*@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public void setButtonsShape() {
+		
+		ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
+		drawable.getPaint().setColor(0xfff365cb);
+		
+		int l = (int) (mButtonSkill.getX()- mButtonSkill.getWidth()/2);
+		int t = (int) (mButtonSkill.getY() -  mButtonSkill.getHeight()/2);
+		int r = (int) (mButtonSkill.getX()+ mButtonSkill.getWidth()/2);
+		int b = (int) (mButtonSkill.getY() +  mButtonSkill.getHeight()/2);
+		
+		drawable.setBounds(l, t, r, b);
+		mButtonSkill.setBackgroundDrawable(drawable);
+		//sd.set
+	}*/
 
 	private void populateUi() {
 
@@ -204,7 +221,6 @@ public class PersonalPageFragment extends Fragment implements
 						Log.d(TAG, "fetch finished" + code);
 					if (code == 1) {
 
-						mUser = (User) data
 								.getSerializable(ServiceContants.RESULT_SERIALIZABLE);
 
 						populateUi();

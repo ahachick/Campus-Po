@@ -137,44 +137,5 @@ public class JSONUtils {
         return null;
     }
     
-    public static Object toEntity(String className, JSONObject jsonObject ) throws InstantiationException, IllegalAccessException, JSONException, ClassNotFoundException {
-    	
-    	Class<?> clz = Class.forName(className);
-    	Object entity = clz.newInstance();
-    	Field[] fields = clz.getDeclaredFields();
-    	for(Field fd : fields) {
-    		//判断属性是否可见，若不可见，刚设为可见
-    		if(!fd.isAccessible()) 
-    			fd.setAccessible(true);
-    		
-    		for(Iterator<?> iterator = jsonObject.keys(); iterator.hasNext();) {
-    			String key = (String) iterator.next();
-    			if(fd.getName().equals(key)) {
-    				
-    				String value = jsonObject.get(key).toString();
-    				
-    				if(fd.getType().equals(String.class))
-    					fd.set(entity, value);
-    				else if(fd.getType().equals(String[].class)) {
-    					JSONArray array = new JSONArray(value);
-    					String[] stringArray = new String[array.length()];
-    					for(int i = 0; i < array.length(); i++)
-    						stringArray[i] = array.getString(i);
-    					fd.set(entity, stringArray);
-    				}
-    				else if (fd.getType().equals(Integer.class)){
-    					if(!value.equals("")) 
-    						fd.set(entity, Integer.parseInt(value));
-    				}else if (fd.getType().equals(Long.class)) {
-    					if(!value.equals(""))
-    						fd.set(entity, Long.parseLong(value));
-    				}else if(fd.getType().equals(Double.class)) {
-    					if(!value.equals(""))
-    						fd.set(entity, Double.parseDouble(value));
-    				} 				
-    			}
-    		}
-    	}
-    	return entity;
-    }
+
 }
