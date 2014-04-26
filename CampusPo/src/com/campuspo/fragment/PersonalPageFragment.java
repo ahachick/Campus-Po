@@ -1,12 +1,10 @@
 package com.campuspo.fragment;
 
+import org.json.JSONObject;
+
 import TestData.Data;
-import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -26,20 +24,22 @@ import android.widget.Toast;
 import com.campuspo.BuildConfig;
 import com.campuspo.R;
 import com.campuspo.activity.PersonalPosterActivity;
+import com.campuspo.app.CampusPoApplication;
+import com.campuspo.app.Constants;
 import com.campuspo.domain.User;
-import com.campuspo.service.CampusPoServiceHelper;
-import com.campuspo.service.ServiceContants;
+import com.campuspo.http.BaseJsonResponseHandler;
 import com.campuspo.util.ImageLoader;
-import com.campuspo.util.Utils;
+import com.eric.android.http.AsyncHttpExecutor;
+import com.eric.android.util.Logger;
 
 public class PersonalPageFragment extends Fragment implements
 		View.OnClickListener {
 
 	private static final String TAG = "PersonalPageFragment";
 
-	private ImageView mImageViewProfileIcon;
-	private TextView mTextViewScreenName;
-	private TextView mTextViewUserDescription;
+	private ImageView mImageProfileIcon;
+	private TextView mTextScreenName;
+	private TextView mTextUserDescription;
 	private ProgressBar mProgressBar;
 
 	private Button mButtonSkill;
@@ -51,8 +51,34 @@ public class PersonalPageFragment extends Fragment implements
 	private User mUser;
 	private BroadcastReceiver mReceiver;
 
+	private BaseJsonResponseHandler mProfileHandler = new BaseJsonResponseHandler() {
+
+		@Override
+		protected void onFinish() {
+			mProgressBar.setVisibility(View.INVISIBLE);
+		}
+
+		@Override
+		protected void onStart() {
+			mProgressBar.setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		protected void onSuccess(JSONObject jsonObject) {
+			Logger.debug(TAG, "onSuccess() called");
+			mUser = new User(jsonObject);
+		}
+
+		@Override
+		protected void onFailure(int errorCode, String errorMessage) {
+			Logger.debug(TAG, "onFailure() called");
+			Toast.makeText(CampusPoApplication.getAppContext(), errorMessage, Toast.LENGTH_SHORT).show();
+		}
+		
+	};
+	
 	private ImageLoader mImageLoader;
-	private CampusPoServiceHelper mServiceHelper;
+	//private CampusPoServiceHelper mServiceHelper;
 
 	public static PersonalPageFragment newInstance(Bundle arg) {
 		PersonalPageFragment fragment = new PersonalPageFragment();
@@ -91,18 +117,18 @@ public class PersonalPageFragment extends Fragment implements
 		View v = inflater.inflate(R.layout.fragment_personal_page, container,
 				false);
 		// bind id to each component
-		mImageViewProfileIcon = (ImageView) v
+		mImageProfileIcon = (ImageView) v
 				.findViewById(R.id.iv_profile_icon);
-		mImageViewProfileIcon.setOnClickListener(new View.OnClickListener() {
+		mImageProfileIcon.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				uploadProfileIcon();
 			}
 		});
-		mTextViewScreenName = (TextView) v
+		mTextScreenName = (TextView) v
 				.findViewById(R.id.tv_user_screen_name);
-		mTextViewUserDescription = (TextView) v
+		mTextUserDescription = (TextView) v
 				.findViewById(R.id.tv_user_description);
 
 		mProgressBar = (ProgressBar) v.findViewById(R.id.progressbar);
@@ -131,7 +157,7 @@ public class PersonalPageFragment extends Fragment implements
 		this.setHasOptionsMenu(true);
 		mImageLoader = ImageLoader.getInstance(getActivity());
 		mImageLoader.setDefaultBitmap(R.drawable.ic_head_default);
-		mServiceHelper = CampusPoServiceHelper.getInstance(getActivity());
+		//mServiceHelper = CampusPoServiceHelper.getInstance(getActivity());
 	}
 
 	private void populateUi() {
@@ -140,12 +166,12 @@ public class PersonalPageFragment extends Fragment implements
 
 			if (BuildConfig.DEBUG)
 				Log.d(TAG, "populating...");
-			mTextViewScreenName.setText(mUser.getUserScreenName());
-			mTextViewUserDescription.setText(mUser.getUserDescription());
+			mTextScreenName.setText(mUser.getUserScreenName());
+			mTextUserDescription.setText(mUser.getUserDescription());
 
 			String profileIconUrl = mUser.getProfileIconUrl();
 			if (null != profileIconUrl && !"".equals(profileIconUrl))
-				mImageLoader.loadImage(profileIconUrl, mImageViewProfileIcon);
+				mImageLoader.loadImage(profileIconUrl, mImageProfileIcon);
 
 		}
 	}
@@ -155,7 +181,7 @@ public class PersonalPageFragment extends Fragment implements
 		super.onResume();
 
 		// mProgressBar.setVisibility(View.VISIBLE);
-
+/*
 		IntentFilter filter = new IntentFilter(
 				CampusPoServiceHelper.ACTION_REQUEST_RESULT);
 		mReceiver = new BroadcastReceiver() {
@@ -200,8 +226,8 @@ public class PersonalPageFragment extends Fragment implements
 
 		if (mUser == null) {
 			mProgressBar.setVisibility(View.VISIBLE);
-			mServiceHelper.getUserProfile();
-		}
+			//mServiceHelper.getUserProfile();
+		}*/
 
 	}
 
@@ -235,8 +261,9 @@ public class PersonalPageFragment extends Fragment implements
 
 			if (BuildConfig.DEBUG)
 				Log.d(TAG, "send request for user profile--begin");
-			mProgressBar.setVisibility(View.VISIBLE);
-			mServiceHelper.getUserProfile();
+			
+			//mServiceHelper.getUserProfile();
+			AsyncHttpExecutor.getInstance(getActivity()).get(Constants.GET_PROFILE_URL, mProfileHandler);
 			break;
 		default:
 		}
